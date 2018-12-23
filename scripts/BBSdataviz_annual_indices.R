@@ -1,9 +1,10 @@
-### THIS CODE IS FOR CREATING GEO-FACET TIME SERIES PLOTS OF NORTH AMERICAN BREEDING BIRD SURVEY STATE-LEVEL DATA
-### PLOTS OF POPULATION INDEX VALUES OR ANNUAL GROWTH RATE (YEAR-OVER-YEAR % CHANGE)
-### SPECIES OR YEARS CAN BE CUSTOMIZED BY CHANGING 'SPECIES', 'YEARSTART', AND 'YEAREND' BELOW
-### STATE-LEVEL DATA EXCLUDING CANADA FOR NOW
-### ULTIMATE GOAL: MAKE PART OF A PACKAGE THAT ALSO INCLUDES DATAVIS OUTPUTS, INCLUDING AT THE ROUTE-LEVEL
+### This code is for creating geo-facet time-series plots of North American Breeding Bird Survey state-level data
+### Two types of plots: population index values and annual growth rate (year-over-year % change)
+### Species and years can be customized by changing 'species', 'yearstart', AND 'yearend' below
+### Info: currently only set up for state-level data excluding Canada; ultimate goal is to make part of a package
+        # that also includes other BBS dataviz outputs (as functions), including at the route level.
 
+### LOAD THE REQUIRED PACKAGES. INSTALL THEM FIRST IF NEEDED; e.g., install.packages("ggplot2")
 library(ggplot2)
 library(dplyr)
 library(geofacet)
@@ -29,7 +30,7 @@ levels(bbs$state)=c("AL","CAN","AZ","AR","CAN","CA","X","X","CO","CT", "DE", "X"
                     "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "CAN", "SC", "SD", "X", "TN", 
                     "TX", "X", "UT", "VA", "VT", "WA", "X", "WI", "WV", "WY")
 
-# filtering by species, geography, and years and creating "population growth rate" (r) variable
+# filtering by species and years; excluding Canada and regional estimates; creating annual % change variable (r)
 bird =
   bbs %>%
   filter(sp==species & state!= "X" & state != "CAN" & year > yearstart - 1 & year < yearend + 1) %>%
