@@ -48,6 +48,16 @@ ggplot(bird) +
   theme(axis.text=element_text(size=3.25))
 #ggsave("figures/BBSindex_all_states_1966-2015.png")
 
+# creating geofacet plot of all state-level time series: BBS indices (same thing, but y-axes fixed)
+#X11(26,18)
+ggplot(bird) + 
+  geom_line(aes(x=year,y=index)) +
+  facet_geo(~state) +
+  theme_bw() +
+  xlab("Year") + ylab("BBS Index") +
+  theme(axis.text=element_text(size=3.25))
+#ggsave("figures/BBSindex_all_states_1966-2015_yfixed.png")
+
 # creating geofacet plot of all state-level time series: BBS index annual growth rate
 #X11(26,18)
 ggplot(bird) + 
