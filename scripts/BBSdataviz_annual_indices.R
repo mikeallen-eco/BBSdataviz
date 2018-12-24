@@ -11,7 +11,8 @@ library(geofacet)
 
 ### SET SPECIES AND YEAR RANGE
 species = "s05460" # this is the AOU species code which you can look up here: https://www.pwrc.usgs.gov/bbl/manual/speclist.cfm
-      # entually will add a lookup table
+      # need to preface the code with "s0"; e.g., Grasshopper Sparrow = "s05460"
+      # entually will add a lookup table to allow the use of bird names
 yearstart = 1966
 yearend = 2015
 
