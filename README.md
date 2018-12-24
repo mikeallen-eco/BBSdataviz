@@ -1,2 +1,2 @@
 # BBSdataviz
-Easily access and visualize bird population data from the USGS Breeding Bird Survey. [Currently state-level data only.]
+Access and visualize bird population data from the USGS Breeding Bird Survey. [Currently set up for state-level US data only.]
