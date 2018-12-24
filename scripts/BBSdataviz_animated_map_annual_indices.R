@@ -4,21 +4,16 @@
         # that also includes other BBS dataviz outputs (as functions), including at the route level.
 
 ### LOAD THE REQUIRED PACKAGES. INSTALL THEM FIRST IF NEEDED; e.g., install.packages("ggplot2")
-#devtools::install_github('thomasp85/gganimate/releases/tag/v0.1.1', force = T)
+      # note: that doesn't currently work for gganimate. Not sure the best way to install it, but this worked:
+      # devtools::install_github('thomasp85/gganimate/releases/tag/v0.1.1', force = T)
 library(gganimate)
 library(gifski)
 library(ggplot2)
-#library(utils)
 library(rgdal)
 library(sp)
 library(maps)
 library(ggthemes)
-#library(rgeos)
-#library(maptools)
-#library(mapmisc)
-#library(sgeostat)
 library(dplyr)
-#library(RColorBrewer)
 
 ### SET SPECIES AND YEAR RANGE
 species = "s05460" # this is the AOU species code which you can look up here: https://www.pwrc.usgs.gov/bbl/manual/speclist.cfm
@@ -74,8 +69,9 @@ map <- us +
              data = bird.spatial, 
              colour = 'darkred', alpha = .5) + 
   scale_size_continuous(range = c(1, 20), 
-                        breaks = c(50, 100, 150, 200)) +
-  labs(size = 'BBS Index') +
+                        breaks = c(50, 100, 150, 200)) + 
+# you may need to edit the breaks depending on the max abundance of the species
+    labs(size = 'BBS Index') +
   labs(title = 'Grasshopper Sparrow, Year: {frame_time}') + 
   theme(plot.title = element_text(size=25)) +
   transition_time(year) +
