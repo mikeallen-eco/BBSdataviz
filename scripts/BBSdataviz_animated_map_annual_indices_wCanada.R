@@ -1,16 +1,15 @@
-## TO DO:
-## DONE - add common names
-## DONE - MAKE A LOOPED VERSION TO CREATE A GIF FOR EVERY SPECIES
-## DONE - MAKE INTO FUNCTION
-## 1) FIX NAMES DATABASE (USE ftp://ftpext.usgs.gov/pub/er/md/laurel/BBS/DataFiles/SpeciesList.txt or similar)
-## DONE - REMOVE LEGEND CODE
-## 3) SAVE A COPY AND ADD CANADA
-## 4) ADD DYNAMIC SURVEY-WIDE CHANGE TEXT AS ANNOTATION
+### This code is a function for generating animated maps of bird population time-series from the North American Breeding Bird Survey (1966-2015 state-level indices published by USGS)
+### Species and years can be customized by changing 'common_name', 'yearstart', AND 'yearend' below
+### Code written by Mike Allen. Much of the animation code repurposed from resources listed below.
+### Credit USGS database and citizen scientist data collectors if you use these maps
 
-### This code is for creating animated maps of bird population time-series from the North American Breeding Bird Survey
-### Species and years can be customized by changing 'species', 'yearstart', AND 'yearend' below
-### Info: currently only set up for state-level data excluding Canada; ultimate goal is to make various
-# BBS dataviz outputs as functions, including at the route level.
+# To do in the future: 
+## 1) address problem with names database (use official BBS database instead? ftp://ftpext.usgs.gov/pub/er/md/laurel/BBS/DataFiles/SpeciesList.txt or similar)
+## 2) Add dynamic text that shows % decline/increase survey-wide
+## 3) figure out how to adjust resolution and add as function argument
+## NOTE: something is strange in the names database (a code matching problem):
+        # Eastern Whip-poor-will mistakenly gets labeled Puerto Rican Nightjar
+        # so this species need to be run and labeled manually. Other species?
 
 ### LOAD THE REQUIRED PACKAGES. INSTALL THEM FIRST IF NEEDED; e.g., install.packages("ggplot2")
 # note: that doesn't currently work for gganimate. Not sure the best way to install it, but this worked:
@@ -84,11 +83,11 @@ birdnames = read.csv("data/AOS_bird_names.csv") %>%
 
 bbsanimate = function(common_name,yearstart,yearend) {
 
+### use this code if you want to run the code without running it as a function (e.g., to fix Eastern Whip-poor-will)
 # common_name = "Puerto Rican Nightjar"
 # yearstart = 1966
 # yearend = 2015
-# note: Eastern Whip-poor-will mistakenly gets labeled Puerto Rican Nightjar
-  # need to manually label this one
+
   
 # filtering by species and years; excluding Canada and regional estimates; creating annual % change variable (r)
 bird =
@@ -131,10 +130,10 @@ anim_save(paste("figures/animated_BBS_us/",common_name,".BBSindex_states_",years
 ####
 #### enter the species common name (in quotes) into the function below
 #### plus the desired start and end year
-#### function will save to file path in line 109
+#### function will save to file path in line 127
 ####
 
-#bbsanimate("Greater Yellowlegs",1966,2015)
+bbsanimate("Greater Yellowlegs",1966,2015)
 
 
 ####
